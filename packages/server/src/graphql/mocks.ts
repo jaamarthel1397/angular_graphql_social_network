@@ -1,8 +1,14 @@
 import casual from 'casual';
 
+let postsIds: string[] = [];
+let usersIds: string[] = [];
 const mocks = {
     User: () => ({
-        id: casual.uuid, 
+        id: () => {
+          let uuid = casual.uuid;
+          usersIds.push(uuid);
+          return uuid;
+        }, 
         fullName: casual.full_name,
         bio: casual.text,
         email: casual.email,
@@ -15,25 +21,32 @@ const mocks = {
       }),
 
     Post: () => ({
-        id: casual.uuid,
+        id: () => {
+          let uuid = casual.uuid;
+          postsIds.push(uuid);
+          return uuid;
+        },
         text: casual.text,
         image: 'https://picsum.photos/seed/picsum/200/300',
         commentsCount: () => casual.integer(0),
         likesCount: () => casual.integer(0),
         latestLike: casual.first_name,
-        createdAt: () => casual.date()
+        createdAt: () => casual.date(),
+        author: casual.random_element(usersIds),
     }),
 
     Comment: () => ({
         id: casual.uuid,
         comment: casual.text,
-        post: casual.uuid,
-        createdAt: () => casual.date()
+        post: casual.random_element(postsIds),
+        createdAt: () => casual.date(),
+        author: casual.random_element(usersIds),
     }),
 
     Like: () => ({
         id: casual.uuid,
-        post: casual.uuid
+        post: casual.random_element(postsIds),
+        user: casual.random_element(usersIds),
     }),
 
     Query: () =>({
