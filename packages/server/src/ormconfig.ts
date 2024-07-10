@@ -8,7 +8,10 @@ const AppDataSource = new DataSource({
   password: "password",
   database: "socialdb",
   synchronize: true,
-  logging: false
+  logging: false,
+  entities: [],
+  migrations: [],
+  subscribers: [],
 });
 
 export default AppDataSource;
