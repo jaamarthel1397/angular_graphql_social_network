@@ -4,8 +4,8 @@ import { User } from "./User";
 @Entity()
 export class Notification {
     @PrimaryGeneratedColumn() id: number;
-    @Column() text: string;
-    @Column() postId: number;
+    @Column("text") text: string;
+    @Column("int") postId: number;
     @CreateDateColumn() createdAt: Date;
 
     @ManyToOne(type => User, user => user.notifications, { onDelete: 'CASCADE' }) user: User;

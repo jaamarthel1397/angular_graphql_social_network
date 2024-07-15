@@ -1,4 +1,9 @@
 import { DataSource } from 'typeorm';
+import { User } from './entities/User';
+import { Like } from './entities/Like';
+import { Post } from './entities/Post';
+import { Comment } from './entities/Comment';
+import { Notification } from './entities/Notification';
 
 const AppDataSource = new DataSource({
   type: "mysql",
@@ -9,7 +14,7 @@ const AppDataSource = new DataSource({
   database: "socialdb",
   synchronize: true,
   logging: false,
-  entities: [],
+  entities: [User, Like, Post, Comment, Notification],
   migrations: [],
   subscribers: [],
 });

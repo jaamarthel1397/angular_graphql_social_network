@@ -7,13 +7,14 @@ import { Notification } from "./Notification";
 @Entity()
 export class User{
     @PrimaryGeneratedColumn() id: number;
-    @Column() fullName: string;
+    @Column("text") fullName: string;
     @Column("text", { nullable: true }) bio: string;
-    @Column({ unique: true }) email: string;
-    @Column() password: string;
-    @Column({ nullable: true }) image: string;
-    @Column({ nullable: true }) coverImage: string;
-    @Column({ default: 0 }) postsCount: number;
+    @Column({ type: "text", unique: true }) userName: string;
+    @Column({ type: "text", unique: true }) email: string;
+    @Column("text") password: string;
+    @Column({ type: "text", nullable: true }) image: string;
+    @Column({ type: "text", nullable: true }) coverImage: string;
+    @Column({ type: "int", default: 0 }) postsCount: number;
     @CreateDateColumn() createdAt: Date;
 
     @OneToMany(type => Post, post => post.author) posts: Post[];

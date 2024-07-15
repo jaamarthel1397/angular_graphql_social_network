@@ -1,4 +1,5 @@
 // npm install @apollo/server express graphql cors
+import 'reflect-metadata';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
