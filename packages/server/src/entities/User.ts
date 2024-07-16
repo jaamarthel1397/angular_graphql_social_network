@@ -9,7 +9,7 @@ export class User{
     @PrimaryGeneratedColumn() id: number;
     @Column("text") fullName: string;
     @Column("text", { nullable: true }) bio: string;
-    @Column({ type: "text", unique: true }) userName: string;
+    @Column({ type: "text", unique: true }) username: string;
     @Column({ type: "text", unique: true }) email: string;
     @Column("text") password: string;
     @Column({ type: "text", nullable: true }) image: string;

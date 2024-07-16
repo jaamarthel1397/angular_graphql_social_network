@@ -1,17 +1,12 @@
-import { faker } from "@faker-js/faker";
-import { FactorizedAttrs, Factory } from "@jorgebodega/typeorm-factory";
+import Faker from 'faker';
+import { define } from "typeorm-seeding";
 import { Notification } from "../../entities/Notification";
-import AppDataSource from "../../ormconfig";
 
-export class NotificationFactory extends Factory<Notification> {
-    protected entity = Notification;
-    protected dataSource = AppDataSource;
+define(Notification, (faker: typeof Faker) => {
 
-    protected attrs(): FactorizedAttrs<Notification> {
-        return {
-            text: faker.lorem.words(),
-            postId: 1,
-            createdAt: faker.date.past(),
-        };
-    }
-}
+    const notification = new Notification();
+    notification.text = faker.lorem.words();
+    notification.postId = 1;
+    notification.createdAt = faker.date.past();
+    return notification;
+  });

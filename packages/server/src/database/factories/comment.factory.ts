@@ -1,16 +1,10 @@
-import { faker } from "@faker-js/faker";
-import { FactorizedAttrs, Factory } from "@jorgebodega/typeorm-factory";
+import Faker from 'faker'
 import { Comment } from "../../entities/Comment";
-import AppDataSource from "../../ormconfig";
+import { define } from 'typeorm-seeding';
 
-export class CommentFactory extends Factory<Comment> {
-    protected entity = Comment;
-    protected dataSource = AppDataSource;
-
-    protected attrs(): FactorizedAttrs<Comment> {
-        return {
-            comment: faker.lorem.text(),
-            createdAt: faker.date.past(),
-        };
-    }
-}
+define(Comment, (faker: typeof Faker) => {
+    const comment = new Comment();
+    comment.comment = faker.lorem.text();
+    comment.createdAt = faker.date.past();
+    return comment;
+  });

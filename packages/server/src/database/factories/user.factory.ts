@@ -1,23 +1,18 @@
-import  { faker }  from "@faker-js/faker";
-import { FactorizedAttrs, Factory } from "@jorgebodega/typeorm-factory";
+import Faker from 'faker';
 import { User } from "../../entities/User";
-import AppDataSource from "../../ormconfig";
+import { define } from 'typeorm-seeding';
 
-export class UserFactory extends Factory<User> {
-    protected entity = User;
-    protected dataSource = AppDataSource;
-
-    protected attrs(): FactorizedAttrs<User> {
-        return {
-            fullName: faker.person.fullName(),
-            bio: faker.lorem.sentences(),
-            email: faker.internet.email(),
-            userName: faker.internet.userName(),
-            password: faker.internet.password(),
-            image: faker.image.url(),
-            coverImage: faker.image.url(),
-            postsCount: 200,
-            createdAt: faker.date.past(), 
-        };
-    }
-}
+define(User, (faker: typeof Faker) => {
+    const user = new User()
+    user.fullName = faker.name.findName();
+    user.bio = faker.lorem.sentences();
+    user.email = faker.internet.email();
+    user.username = faker.internet.userName();
+    user.password = faker.internet.password();
+    user.image = faker.image.imageUrl();
+    user.coverImage = faker.image.imageUrl();
+    user.postsCount = 200;
+    user.createdAt = faker.date.past();
+  
+    return user;
+  });

@@ -1,12 +1,13 @@
 import fs from 'fs';
 import { GraphQLSchema } from 'graphql';
+import { gql } from 'apollo-server-express';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import resolvers from './resolvers';
 
-const typeDefs = `
+const typeDefs = gql`
     ${fs.readFileSync(
         __dirname.concat('/schema.graphql'), 'utf8')}
-`
+`;
 
 const schema: GraphQLSchema = makeExecutableSchema({
     typeDefs,

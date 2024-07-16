@@ -1,20 +1,14 @@
-import { faker } from '@faker-js/faker';
-import { FactorizedAttrs, Factory } from '@jorgebodega/typeorm-factory';
+import Faker from 'faker';
 import { Post } from '../../entities/Post';
-import AppDataSource from '../../ormconfig';
+import { define } from 'typeorm-seeding';
 
-export class PostFactory extends Factory<Post> {
-    protected entity = Post;
-    protected dataSource = AppDataSource;
-
-    protected attrs(): FactorizedAttrs<Post> {
-        return {
-            text: faker.lorem.text(),
-            image: faker.image.url(),
-            commentsCount: 100,
-            likesCount: 200,
-            latestLike: faker.person.fullName(),
-            createdAt: faker.date.past()
-        };
-    }
-}
+define(Post, (faker: typeof Faker) => {
+    const post = new Post();
+    post.text = faker.lorem.text();
+    post.image = faker.image.imageUrl();
+    post.commentsCount = 100;
+    post.likesCount = 200;
+    post.latestLike = faker.name.findName();
+    post.createdAt = faker.date.past();
+    return post;
+  });
